@@ -56,7 +56,7 @@ const ShowBooks = () => {
               </tbody>
             </table>
           </div>
-          <div className="d-flex justify-content-end align-items-center showOnSmallScreens">
+          <div className="d-flex justify-content-end align-items-center">
             <div className="">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +71,7 @@ const ShowBooks = () => {
                 />
               </svg>
             </div>
-            <div>&nbsp;scroll right to see complete data</div>
+            <div>&nbsp;scroll right if you cannot see complete table</div>
           </div>
         </div>
       )}
