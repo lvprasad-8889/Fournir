@@ -1,0 +1,23 @@
+.adjustBooks {
+  width: 100%;
+  overflow-x: scroll;
+}
+
+
+
+.adjustBooks::-webkit-scrollbar {
+  display: none;
+}
+
+.adjustTable{
+  width: 1500px !important;
+}
+
+.showOnSmallScreens {
+  visibility: hidden;
+}
+@media screen and (max-width: 1500px) {
+  .showOnSmallScreens {
+    visibility: visible;
+  }
+}
