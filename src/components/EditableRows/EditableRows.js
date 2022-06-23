@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { bookActions } from "../../store";
 const EditableRows = (props) => {
+  const totalBooks = useSelector((state) => state.books);
   const [editDetails, seteditDetails] = useState({
     authorName: props.book.authorName,
     bookName: props.book.bookName,
@@ -13,13 +14,17 @@ const EditableRows = (props) => {
     totalPages: props.book.totalPages,
   });
   const dispatch = useDispatch();
+
+  // updates for every key stroke
   const updateBookDetails = (event) => {
     let duplicateDetails = { ...editDetails };
     duplicateDetails[event.target.name] = event.target.value;
     seteditDetails(duplicateDetails);
   };
+  // user after submitting save button
   const saveBookDetails = () => {
     let duplicateDetails = { ...editDetails };
+    // if user do not enter any filed automatically updates with previous existing value
     if (editDetails.authorName.trim().length === 0) {
       duplicateDetails.authorName = props.book.authorName;
     }
@@ -48,13 +53,24 @@ const EditableRows = (props) => {
     if (editDetails.totalPages.trim().length === 0) {
       duplicateDetails.totalPages = props.book.totalPages;
     }
-    dispatch(bookActions.updateBook({ book: editDetails, index: props.index }));
-    props.changeId(null);
+    const bookExists = totalBooks.find(
+      (item) => editDetails.bookName === item.bookName
+    );
+    if (bookExists) {
+      alert("Book name was already taken");
+    } else {
+      // updating book in the redux
+      dispatch(
+        bookActions.updateBook({ book: editDetails, index: props.index })
+      );
+      // changing Id to null
+      props.changeId(null);
+    }
   };
   return (
     <tr className="text-center align-middle">
       <th scope="row">{props.index + 1}</th>
-      <td className="">
+      <td className="p-5">
         <input
           type="text"
           value={editDetails.bookName}

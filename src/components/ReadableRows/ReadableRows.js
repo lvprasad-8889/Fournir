@@ -2,9 +2,10 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { bookActions } from "../../store";
 const ReadableRows = (props) => {
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
+  // deleting book in the store based on index
   const deleteBook = (index) => {
-    dispatch(bookActions.deleteBook({index}))
+    dispatch(bookActions.deleteBook({ index }));
   };
   return (
     <tr className="text-center align-middle">

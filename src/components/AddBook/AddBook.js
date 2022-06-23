@@ -19,14 +19,15 @@ const AddBook = () => {
   });
   const [formFilled, setFormfilled] = useState(false);
 
+  // updates for every key stroke
   const changeBookDetails = (event) => {
     let duplicateDetails = { ...bookDetails };
-    console.log(event.target.value);
     if (event.target.name === "releaseDate")
       duplicateDetails[event.target.name] = event.target.value;
     else duplicateDetails[event.target.name] = event.target.value;
     setBookDetails(duplicateDetails);
   };
+  // validating form after submitting
   const formSubmitted = (event) => {
     event.preventDefault();
     setFormfilled(true);
@@ -41,14 +42,28 @@ const AddBook = () => {
       bookDetails.publishedBy.trim().length > 0 &&
       bookDetails.totalPages.trim().length > 0
     ) {
+      // book name is the primary key here, checking book name exists or not
       const bookExists = totalBooks.find(
         (item) => bookDetails.bookName === item.bookName
       );
       if (bookExists) {
         alert("Book already exists");
       } else {
+        // adding book in the redux
         dispatch(bookActions.addBook({ book: bookDetails }));
-        alert("Book added successfully")
+        alert("Book added successfully");
+        // making fields empty
+        setBookDetails({
+          authorName: "",
+          bookName: "",
+          bookRating: "",
+          bookPrice: "",
+          category: "",
+          releaseDate: "",
+          publishedBy: "",
+          totalPages: "",
+        });
+        setFormfilled(false);
       }
     }
   };

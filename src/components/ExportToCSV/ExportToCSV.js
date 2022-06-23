@@ -16,9 +16,11 @@ const ExportToCSV = () => {
     ];
     let columnsResult = columns.join(",");
     const tempBooks = totalBooks.map((item) => Object.assign({}, item));
+    // adding serial number as a column 
     tempBooks.map((book, index) => 
       book.Sno = index + 1
     );
+    // coverting string to date and coverting to international date format
     tempBooks.map((book) => 
     book.releaseDate = new Date(book.releaseDate).toISOString()
     );
@@ -27,14 +29,17 @@ const ExportToCSV = () => {
       .map((book) => book.join(","));
     rowsResult.unshift(columnsResult);
     rowsResult = rowsResult.join("\n");
+    // creating csv file
     let CSVFile = new Blob([rowsResult], {
       type: "text/csv",
     });
-    var temp_link = document.createElement("a");
-    temp_link.download = "bookdetails.csv";
+    // creating an anker tag and getting URL 
+    var download_link = document.createElement("a");
+    download_link.download = "bookdetails.csv";
     var url = window.URL.createObjectURL(CSVFile);
-    temp_link.href = url;
-    temp_link.click();
+    download_link.href = url;
+    // automatically it needs to be clicked to open URL
+    download_link.click();
   };
   return (
     <div className="btn btn-primary" onClick={saveCSVFile}>

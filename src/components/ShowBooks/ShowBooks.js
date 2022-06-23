@@ -6,8 +6,9 @@ import ReadableRows from "../ReadableRows/ReadableRows";
 import EditableRows from "../EditableRows/EditableRows";
 const ShowBooks = () => {
   const [editBookId, seteditBookId] = useState(null);
-  const totalBooks = useSelector((state)=>state.books);
-
+  // getting data from the store
+  const totalBooks = useSelector((state) => state.books);
+  // updating bookId so that user can edit
   const changeBookId = (id) => {
     seteditBookId(id);
   };
@@ -16,8 +17,7 @@ const ShowBooks = () => {
       {totalBooks.length > 0 && (
         <div className="">
           <div className="d-flex justify-content-end gap-4">
-          <ExportToCSV />
-          
+            <ExportToCSV />
           </div>
           <div className="adjustBooks">
             <table className="table adjustTable table-bordered mt-3">
