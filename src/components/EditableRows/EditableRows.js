@@ -54,7 +54,8 @@ const EditableRows = (props) => {
       duplicateDetails.totalPages = props.book.totalPages;
     }
     const bookExists = totalBooks.find(
-      (item) => editDetails.bookName === item.bookName
+      (item) =>
+        editDetails.bookName.toLowerCase() === item.bookName.toLowerCase()
     );
     if (bookExists) {
       alert("Book name was already taken");

@@ -44,7 +44,8 @@ const AddBook = () => {
     ) {
       // book name is the primary key here, checking book name exists or not
       const bookExists = totalBooks.find(
-        (item) => bookDetails.bookName === item.bookName
+        (item) =>
+          bookDetails.bookName.toLowerCase() === item.bookName.toLowerCase()
       );
       if (bookExists) {
         alert("Book already exists");
