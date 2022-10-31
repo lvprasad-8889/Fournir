@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import "./AddBook.css";
-import { bookActions } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { bookActions } from "../../store";
+import "./AddBook.css";
 
 const AddBook = () => {
   const totalBooks = useSelector((state) => state.books);
@@ -18,6 +19,7 @@ const AddBook = () => {
     totalPages: "",
   });
   const [formFilled, setFormfilled] = useState(false);
+  let navigate = useNavigate();
 
   // updates for every key stroke
   const changeBookDetails = (event) => {
@@ -266,9 +268,9 @@ const AddBook = () => {
                   />
                   <div
                     className="btn btn-primary"
-                    onClick={() => setClose(true)}
+                    onClick={() => navigate("/books")}
                   >
-                    Close
+                    Show Books
                   </div>
                 </div>
               </form>
